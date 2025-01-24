@@ -151,11 +151,16 @@ exports.googleCallback = async (req, res) => {
             process.env.JWT_SECRET,
             { expiresIn: '24h' }
         );
+
+        console.log("Redirecting to:", `${process.env.FRONTEND_URL}/auth/google/callback`);
+        console.log("With token:", token);
+        console.log("With user:", req.user);
         
         // Redirect to frontend with token
         const redirectUrl = `${process.env.FRONTEND_URL}/auth/google/callback?token=${token}&user=${encodeURIComponent(JSON.stringify(req.user))}`;
         res.redirect(redirectUrl);
     } catch (error) {
+        console.error("Google callback error:", error);
         res.redirect(`${process.env.FRONTEND_URL}/auth/login?error=auth_failed`);
     }
 };
