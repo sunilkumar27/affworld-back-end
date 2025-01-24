@@ -143,7 +143,7 @@ exports.googleAuth = passport.authenticate('google', {
     prompt: "select_account"
 });
 
-exports.googleCallback = async (req, res) => {
+/*exports.googleCallback = async (req, res) => {
     try {
         // Generate token for the authenticated user
         const token = jwt.sign(
@@ -162,5 +162,47 @@ exports.googleCallback = async (req, res) => {
     } catch (error) {
         console.error("Google callback error:", error);
         res.redirect(`${process.env.FRONTEND_URL}/auth/login?error=auth_failed`);
+    }
+};*/
+
+exports.googleCallback = async (req, res) => {
+    try {
+        const token = jwt.sign(
+            { userId: req.user._id },
+            process.env.JWT_SECRET,
+            { expiresIn: '24h' }
+        );
+        
+        // Use HTML form to post data instead of redirect
+        const html = `
+            <html>
+                <body>
+                    <script>
+                        window.opener.postMessage({
+                            type: 'GOOGLE_AUTH_SUCCESS',
+                            token: '${token}',
+                            user: ${JSON.stringify(req.user)}
+                        }, '${process.env.FRONTEND_URL}');
+                        window.close();
+                    </script>
+                </body>
+            </html>
+        `;
+        res.send(html);
+    } catch (error) {
+        const html = `
+            <html>
+                <body>
+                    <script>
+                        window.opener.postMessage({
+                            type: 'GOOGLE_AUTH_ERROR',
+                            error: 'Authentication failed'
+                        }, '${process.env.FRONTEND_URL}');
+                        window.close();
+                    </script>
+                </body>
+            </html>
+        `;
+        res.send(html);
     }
 };
