@@ -23,10 +23,28 @@ app.use(cors({
 app.use(express.json());
 app.use(passport.initialize());
 
-// Health check endpoint for Vercel
-app.get('/api/health', (req, res) => {
-  res.status(200).json({ status: 'OK', environment: process.env.NODE_ENV });
+// Add root route handler
+app.get('/', (req, res) => {
+  res.json({
+    message: 'Welcome to Task Management API',
+    version: '1.0.0',
+    endpoints: {
+      auth: '/api/auth',
+      tasks: '/api/tasks',
+      posts: '/api/posts'
+    }
+  });
 });
+
+// Health check endpoint
+app.get('/health', (req, res) => {
+  res.status(200).json({ 
+    status: 'OK',
+    timestamp: new Date(),
+    service: 'Task Management API'
+  });
+});
+
 
 // Routes
 app.use('/api/auth', authRoutes);
@@ -47,7 +65,7 @@ app.use((err, req, res, next) => {
   res.status(500).json({ 
     success: false, 
     message: 'Internal Server Error',
-    error: process.env.NODE_ENV === 'development' ? err.message : undefined
+    error: err.message
   });
 });
 
