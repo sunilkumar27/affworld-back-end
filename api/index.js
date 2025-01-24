@@ -23,7 +23,7 @@ app.use(cors({
 app.use(express.json());
 app.use(passport.initialize());
 
-// Add root route handler
+// Base routes
 app.get('/', (req, res) => {
   res.json({
     message: 'Welcome to Task Management API',
@@ -36,13 +36,9 @@ app.get('/', (req, res) => {
   });
 });
 
-// Health check endpoint
+// Health check
 app.get('/health', (req, res) => {
-  res.status(200).json({ 
-    status: 'OK',
-    timestamp: new Date(),
-    service: 'Task Management API'
-  });
+  res.status(200).json({ status: 'OK' });
 });
 
 
