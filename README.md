@@ -102,4 +102,4 @@ DELETE /api/posts/:id - Delete post
 
 ## Support
 
-For support, email sunilkumar27@gmail.com or create an issue in this repository.
+For support create an issue in this repository.
