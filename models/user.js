@@ -1,4 +1,8 @@
 // models/User.js
+
+/**
+* Mongoose schema and model for User.
+*/
 const mongoose = require('mongoose');
 const bcrypt = require('bcrypt');
 

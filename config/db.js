@@ -1,4 +1,8 @@
 // config/db.js
+
+/**
+* Manages the connection to the MongoDB database.
+*/
 const mongoose = require('mongoose');
 
 const connectDB = async () => {

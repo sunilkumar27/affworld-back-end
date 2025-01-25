@@ -1,4 +1,8 @@
 // utils/email.js (for password reset functionality)
+
+/**
+* Sends password reset email using Nodemailer.
+*/
 const nodemailer = require('nodemailer');
 
 const sendEmail = async (options) => {

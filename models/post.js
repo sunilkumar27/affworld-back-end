@@ -1,4 +1,8 @@
 // models/Post.js
+
+/**
+* Mongoose schema and model for Post.
+*/
 const mongoose = require('mongoose');
 
 const postSchema = new mongoose.Schema({

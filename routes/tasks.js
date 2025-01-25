@@ -1,4 +1,8 @@
 // routes/tasks.js
+
+/**
+* Defines the routes and controllers for tasks-related functionalities.
+*/
 const express = require('express');
 const router = express.Router();
 const taskController = require('../controllers/task-controller');

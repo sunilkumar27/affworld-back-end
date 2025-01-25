@@ -1,4 +1,8 @@
 // controllers/auth-Controller.js
+
+/**
+* Handles CRUD operations for auth.
+*/
 const jwt = require('jsonwebtoken');
 const User = require('../models/user');
 const crypto = require('crypto');
@@ -151,10 +155,6 @@ exports.googleCallback = async (req, res) => {
             { expiresIn: '24h' }
         );
 
-        console.log("Redirecting to:", `${process.env.FRONTEND_URL}/auth/google/callback`);
-        console.log("With token:", token);
-        console.log("With user:", req.user);
-        
         // Redirect to frontend with token
         const redirectUrl = `${process.env.FRONTEND_URL}/auth/google/callback?token=${token}&user=${encodeURIComponent(JSON.stringify(req.user))}`;
         res.redirect(redirectUrl);
@@ -163,45 +163,3 @@ exports.googleCallback = async (req, res) => {
         res.redirect(`${process.env.FRONTEND_URL}/auth/login?error=auth_failed`);
     }
 };
-
-/*exports.googleCallback = async (req, res) => {
-    try {
-        const token = jwt.sign(
-            { userId: req.user._id },
-            process.env.JWT_SECRET,
-            { expiresIn: '24h' }
-        );
-        
-        // Use HTML form to post data instead of redirect
-        const html = `
-            <html>
-                <body>
-                    <script>
-                        window.opener.postMessage({
-                            type: 'GOOGLE_AUTH_SUCCESS',
-                            token: '${token}',
-                            user: ${JSON.stringify(req.user)}
-                        }, '${process.env.FRONTEND_URL}');
-                        window.close();
-                    </script>
-                </body>
-            </html>
-        `;
-        res.send(html);
-    } catch (error) {
-        const html = `
-            <html>
-                <body>
-                    <script>
-                        window.opener.postMessage({
-                            type: 'GOOGLE_AUTH_ERROR',
-                            error: 'Authentication failed'
-                        }, '${process.env.FRONTEND_URL}');
-                        window.close();
-                    </script>
-                </body>
-            </html>
-        `;
-        res.send(html);
-    }
-};*/

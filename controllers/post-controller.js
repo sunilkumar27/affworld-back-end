@@ -1,4 +1,8 @@
 // controllers/post-controller.js
+
+/**
+* Handles CRUD operations for Feed.
+*/
 const Post = require('../models/post');
 const cloudinary = require('../config/cloudinary');
 

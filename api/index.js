@@ -1,9 +1,13 @@
 // api/index.js
+
+/**
+* Handles the main Express application setup, including CORS, authentication,
+* route definitions, and error handling.
+*/
 require('dotenv').config();
 
 const express = require('express');
 const cors = require('cors');
-const mongoose = require('mongoose');
 const passport = require('../config/passport');
 
 const authRoutes = require('../routes/auth');
@@ -46,14 +50,6 @@ app.use('/api/auth', authRoutes);
 app.use('/api/tasks', taskRoutes);
 app.use('/api/posts', postRoutes);
 
-// Connect to MongoDB
-mongoose.connect(process.env.MONGODB_URI, {
-  useNewUrlParser: true,
-  useUnifiedTopology: true,
-})
-.then(() => console.log('Connected to MongoDB'))
-.catch(err => console.error('MongoDB connection error:', err));
-
 // Error handling middleware
 app.use((err, req, res, next) => {
   console.error(err.stack);
@@ -72,5 +68,4 @@ app.use((req, res) => {
   });
 });
 
-// Export for Vercel
 module.exports = app;

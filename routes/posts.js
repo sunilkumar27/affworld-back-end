@@ -1,4 +1,8 @@
 // routes/posts.js
+
+/**
+* Defines the routes and controllers for feed-related functionalities.
+*/
 const express = require('express');
 const router = express.Router();
 const postController = require('../controllers/post-controller');

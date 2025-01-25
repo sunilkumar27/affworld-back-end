@@ -1,4 +1,9 @@
 // config/passport.js
+
+/**
+* Configures the Google OAuth2 strategy for user authentication.
+* Handles user registration, login, and profile retrieval using Google credentials.
+*/
 const passport = require('passport');
 const GoogleStrategy = require('passport-google-oauth20').Strategy;
 const User = require('../models/user');

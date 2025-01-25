@@ -1,4 +1,9 @@
 // server.js
+
+/**
+ * Main server setup and configuration for the Task Management API.
+ * Handles middleware, routing, database connection, and server startup.
+ */
 require('dotenv').config();
 
 const express = require('express');

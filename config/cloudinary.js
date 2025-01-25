@@ -1,4 +1,8 @@
 // config/cloudinary.js
+
+/**
+* Configures the Cloudinary service for image uploads and management.
+*/
 const cloudinary = require('cloudinary').v2;
 
 cloudinary.config({

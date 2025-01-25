@@ -1,4 +1,8 @@
 // controllers/task-controller.js
+
+/**
+* Handles CRUD operations for tasks.
+*/
 const Task = require('../models/task');
 
 exports.createTask = async (req, res) => {
