@@ -137,13 +137,12 @@ exports.resetPassword = async (req, res) => {
 };
 
 // Google OAuth callback
-
 exports.googleAuth = passport.authenticate('google', {
     scope: ['profile', 'email'],
     prompt: "select_account"
 });
 
-/*exports.googleCallback = async (req, res) => {
+exports.googleCallback = async (req, res) => {
     try {
         // Generate token for the authenticated user
         const token = jwt.sign(
@@ -163,9 +162,9 @@ exports.googleAuth = passport.authenticate('google', {
         console.error("Google callback error:", error);
         res.redirect(`${process.env.FRONTEND_URL}/auth/login?error=auth_failed`);
     }
-};*/
+};
 
-exports.googleCallback = async (req, res) => {
+/*exports.googleCallback = async (req, res) => {
     try {
         const token = jwt.sign(
             { userId: req.user._id },
@@ -205,4 +204,4 @@ exports.googleCallback = async (req, res) => {
         `;
         res.send(html);
     }
-};
+};*/
