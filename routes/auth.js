@@ -26,13 +26,17 @@ router.get('/verify-token', auth, (req, res) => {
 
 // Google OAuth routes
 router.get('/google', authController.googleAuth);
-router.get(
+/*router.get(
     '/google/callback',
     passport.authenticate('google', {
         failureRedirect: "/login",
         session: false
     }),
     authController.googleCallback
-);
+);*/
+router.get('/google/callback', (req, res, next) => {
+    console.log('Google callback reached', req.url);
+    next();
+}, passport.authenticate('google'), authController.googleCallback);
 
 module.exports = router;
