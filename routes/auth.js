@@ -37,6 +37,6 @@ router.get('/google', authController.googleAuth);
 router.get('/google/callback', (req, res, next) => {
     console.log('Google callback reached', req.url);
     next();
-}, passport.authenticate('google'), authController.googleCallback);
+}, passport.authenticate('google', { session: false }), authController.googleCallback);
 
 module.exports = router;
